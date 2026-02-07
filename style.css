@@ -1,78 +1,207 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap");
+
+/* Theme variables and palette */
 :root {
   color-scheme: light;
+  --ink: #f7f4ef;
+  --ink-muted: rgba(247, 244, 239, 0.78);
+  --ocean-1: #0b2f46;
+  --ocean-2: #0f4a63;
+  --ocean-3: #1a6b7f;
+  --accent: #f6c667;
+  --accent-deep: #eaa332;
+  --card: rgba(12, 26, 36, 0.68);
+  --card-border: rgba(246, 198, 103, 0.28);
 }
 
+/* Consistent sizing across elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Base layout and atmospheric background */
 body {
   margin: 0;
-  font-family: "Georgia", "Times New Roman", serif;
-  background: #5d7fa8;
-  color: #ffffff;
+  font-family: "Space Grotesk", "Arial", sans-serif;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(246, 198, 103, 0.18), transparent 45%),
+    radial-gradient(circle at 80% 10%, rgba(26, 107, 127, 0.6), transparent 55%),
+    linear-gradient(135deg, #0a2637 0%, #0d394d 45%, #0f4a63 100%);
 }
 
+/* Hero panel with layered gradient glow */
 header {
   min-height: 45vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: radial-gradient(circle at top, #7b9cc1, #5d7fa8 65%);
-  padding: 64px 24px;
+  padding: 72px 24px 64px;
+  position: relative;
+  overflow: hidden;
 }
 
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.9;
+  z-index: 0;
+  background:
+    radial-gradient(circle at top, rgba(246, 198, 103, 0.3), transparent 55%),
+    radial-gradient(circle at 75% 30%, rgba(15, 74, 99, 0.9), transparent 60%);
+}
+
+/* Intro text block and subtle rise animation */
 .hero {
-  max-width: 900px;
+  max-width: 920px;
+  position: relative;
+  z-index: 1;
+  animation: rise 0.9s ease-out both;
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(2.7rem, 5vw, 4.7rem);
   font-weight: 800;
   letter-spacing: 0.02em;
 }
 
+/* Shared subtitle styling for hero and section intro */
 .subtitle {
   margin: 16px auto 0;
-  font-size: clamp(1.1rem, 2.1vw, 1.5rem);
-  line-height: 1.6;
-  max-width: 50ch;
+  max-width: 58ch;
+  font-size: clamp(1.05rem, 2.1vw, 1.5rem);
+  line-height: 1.7;
+  color: var(--ink-muted);
 }
 
+/* Main column sizing */
 main {
-  padding: 64px 24px 96px;
+  padding: 48px 24px 96px;
   max-width: 1100px;
   margin: 0 auto;
 }
 
 .section-title {
-  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-  margin: 0 0 32px;
+  margin: 0 0 24px;
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
 }
 
+/* Timeline layout with a vertical spine */
 .timeline {
   display: grid;
   gap: 24px;
+  position: relative;
+  padding-left: clamp(14px, 4vw, 32px);
 }
 
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent) 0%, rgba(246, 198, 103, 0) 100%);
+}
+
+/* Milestone cards */
 .timeline-card {
-  background: rgba(18, 54, 82, 0.6);
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 18px 40px rgba(11, 40, 62, 0.2);
+  position: relative;
+  padding: 24px 26px;
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  box-shadow: 0 20px 45px rgba(5, 20, 28, 0.35);
+  animation: fade-in 0.7s ease-out both;
+}
+
+.timeline-card::before {
+  content: "";
+  position: absolute;
+  left: -32px;
+  top: 26px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(246, 198, 103, 0.18);
 }
 
 .timeline-year {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.18em;
+  color: var(--accent);
 }
 
+/* Milestone title */
 .timeline-card h3 {
-  margin: 12px 0 8px;
-  font-size: 1.5rem;
+  margin: 12px 0 10px;
+  font-size: 1.4rem;
 }
 
+/* Milestone description */
 .timeline-card p {
   margin: 0;
-  line-height: 1.7;
+  line-height: 1.75;
+  color: var(--ink-muted);
+}
+
+/* Motion for the hero and timeline cards */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive spacing adjustments */
+@media (min-width: 960px) {
+  .timeline {
+    gap: 28px;
+  }
+
+  .timeline-card {
+    padding: 26px 30px;
+  }
+}
+
+@media (max-width: 640px) {
+  header {
+    padding: 64px 20px 56px;
+  }
+
+  .timeline {
+    padding-left: 20px;
+  }
+
+  .timeline::before {
+    left: 6px;
+  }
+
+  .timeline-card::before {
+    left: -26px;
+  }
 }
