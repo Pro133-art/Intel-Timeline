@@ -1,0 +1,78 @@
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: "Georgia", "Times New Roman", serif;
+  background: #5d7fa8;
+  color: #ffffff;
+}
+
+header {
+  min-height: 45vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(circle at top, #7b9cc1, #5d7fa8 65%);
+  padding: 64px 24px;
+}
+
+.hero {
+  max-width: 900px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  margin: 16px auto 0;
+  font-size: clamp(1.1rem, 2.1vw, 1.5rem);
+  line-height: 1.6;
+  max-width: 50ch;
+}
+
+main {
+  padding: 64px 24px 96px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  margin: 0 0 32px;
+}
+
+.timeline {
+  display: grid;
+  gap: 24px;
+}
+
+.timeline-card {
+  background: rgba(18, 54, 82, 0.6);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 18px 40px rgba(11, 40, 62, 0.2);
+}
+
+.timeline-year {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.timeline-card h3 {
+  margin: 12px 0 8px;
+  font-size: 1.5rem;
+}
+
+.timeline-card p {
+  margin: 0;
+  line-height: 1.7;
+}
