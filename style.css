@@ -173,7 +173,8 @@ footer .subtitle {
 /* Milestone cards */
 .timeline-card {
   position: relative;
-  flex: 0 0 calc((100% - (3 * var(--card-gap))) / 4);
+  flex: 0 0 270px;
+  width: 270px;
   padding: 24px 26px;
   border-radius: 20px;
   border: 1px solid var(--card-border);
@@ -181,6 +182,7 @@ footer .subtitle {
   box-shadow: 0 20px 45px rgba(5, 20, 28, 0.35);
   animation: fade-in 0.7s ease-out both;
   scroll-snap-align: start;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .timeline-card::before {
@@ -234,6 +236,26 @@ footer .subtitle {
   margin: 0;
   line-height: 1.75;
   color: var(--ink-muted);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(10px);
+  transition: max-height 0.4s ease, opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+
+.timeline-card:hover,
+.timeline-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 55px rgba(5, 20, 28, 0.45);
+}
+
+.timeline-card:hover p,
+.timeline-card:focus-within p {
+  max-height: 220px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 /* Motion for the hero and timeline cards */
