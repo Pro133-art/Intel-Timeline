@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap");
 
-/* Theme variables and palette */
+/* =========================
+   Theme + Global Defaults
+   ========================= */
 :root {
   color-scheme: light;
   --ink: #f7f4ef;
@@ -14,12 +16,14 @@
   --card-border: rgba(246, 198, 103, 0.28);
 }
 
-/* Consistent sizing across elements */
+/* Keep sizing predictable across the layout. */
 * {
   box-sizing: border-box;
 }
 
-/* Base layout and atmospheric background */
+/* =========================
+   Page Background + Pattern
+   ========================= */
 body {
   margin: 0;
   font-family: "Space Grotesk", "Arial", sans-serif;
@@ -38,6 +42,7 @@ body {
     );
 }
 
+/* Subtle animated hexagon overlay that sits behind all content. */
 body::before {
   content: "";
   position: fixed;
@@ -52,12 +57,15 @@ body::before {
   animation: hex-fade 10s ease-in-out infinite;
 }
 
+/* Ensure content layers above the pattern. */
 body > * {
   position: relative;
   z-index: 1;
 }
 
-/* Hero panel with layered gradient glow */
+/* =========================
+   Header + Navigation
+   ========================= */
 header {
   min-height: 45vh;
   display: flex;
@@ -72,6 +80,7 @@ header {
   background-color: rgba(39, 88, 240, 0.92);
 }
 
+/* Solid overlay keeps the header color consistent across the hero. */
 header::before {
   content: "";
   position: absolute;
@@ -81,7 +90,6 @@ header::before {
   background: rgba(39, 88, 240, 0.92);
 }
 
-/* Intro text block and subtle rise animation */
 .hero {
   max-width: 920px;
   position: relative;
@@ -89,7 +97,7 @@ header::before {
   animation: rise 0.9s ease-out both;
 }
 
-/* Skip link for keyboard navigation */
+/* Skip link stays out of view until focused. */
 .skip-link {
   position: absolute;
   left: 16px;
@@ -108,7 +116,6 @@ header::before {
   transform: translateY(0);
 }
 
-/* Primary navigation layout */
 nav {
   position: relative;
   z-index: 1;
@@ -133,6 +140,9 @@ nav a:focus {
   color: var(--accent);
 }
 
+/* =========================
+   Typography + Shared Text
+   ========================= */
 h1 {
   margin: 0;
   font-family: "Playfair Display", "Times New Roman", serif;
@@ -141,7 +151,14 @@ h1 {
   letter-spacing: 0.02em;
 }
 
-/* Shared subtitle styling for hero and section intro */
+.section-title {
+  margin: 0 0 24px;
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(1.55rem, 2.3vw, 2.1rem);
+  text-align: center;
+}
+
+/* Subtitle treatment is shared by hero + overview copy. */
 .subtitle {
   margin: 16px auto 0;
   max-width: 58ch;
@@ -155,25 +172,20 @@ h1 {
   text-align: center;
 }
 
-/* Main column sizing */
+/* =========================
+   Layout Sections
+   ========================= */
 main {
   padding: 48px 24px 96px;
   max-width: 1100px;
   margin: 0 auto;
 }
 
-.section-title {
-  margin: 0 0 24px;
-  font-family: "Playfair Display", "Times New Roman", serif;
-  font-size: clamp(1.55rem, 2.3vw, 2.1rem);
-  text-align: center;
-}
-
+/* Adds breathing room between overview and timeline. */
 .timeline-intro {
   margin-bottom: 45px;
 }
 
-/* Footer context styling */
 footer {
   padding: 0 24px 64px;
   text-align: center;
@@ -183,7 +195,9 @@ footer .subtitle {
   margin: 0 auto;
 }
 
-/* Timeline layout with a horizontal scroll rail */
+/* =========================
+   Timeline + Cards
+   ========================= */
 .timeline {
   --card-gap: 24px;
   display: flex;
@@ -195,6 +209,7 @@ footer .subtitle {
   scrollbar-color: var(--accent) rgba(11, 47, 70, 0.35);
 }
 
+/* Decorative rail guiding the horizontal scroll. */
 .timeline::before {
   content: "";
   position: absolute;
@@ -205,7 +220,6 @@ footer .subtitle {
   background: linear-gradient(90deg, var(--accent) 0%, rgba(246, 198, 103, 0.1) 100%);
 }
 
-/* Milestone cards */
 .timeline-card {
   position: relative;
   flex: 0 0 270px;
@@ -220,6 +234,7 @@ footer .subtitle {
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
+/* Accent dot that pins each card to the rail. */
 .timeline-card::before {
   content: "";
   position: absolute;
@@ -240,12 +255,12 @@ footer .subtitle {
   color: var(--accent);
 }
 
-/* Milestone title */
 .timeline-card h3 {
   margin: 12px 0 10px;
   font-size: 1.4rem;
 }
 
+/* Media slot for each milestone image. */
 .timeline-media {
   margin: 12px auto 16px;
   width: 100%;
@@ -266,7 +281,7 @@ footer .subtitle {
   display: block;
 }
 
-/* Milestone description */
+/* Card descriptions reveal on hover/focus. */
 .timeline-card p {
   margin: 0;
   font-size: clamp(14px, 1.2vw, 16px);
@@ -294,7 +309,9 @@ footer .subtitle {
   pointer-events: auto;
 }
 
-/* Motion for the hero and timeline cards */
+/* =========================
+   Motion
+   ========================= */
 @keyframes rise {
   from {
     opacity: 0;
@@ -327,7 +344,9 @@ footer .subtitle {
   }
 }
 
-/* Responsive spacing adjustments */
+/* =========================
+   Responsive Adjustments
+   ========================= */
 @media (min-width: 960px) {
   .timeline {
     --card-gap: 28px;
