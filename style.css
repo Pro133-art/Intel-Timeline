@@ -25,10 +25,36 @@ body {
   font-family: "Space Grotesk", "Arial", sans-serif;
   min-height: 100vh;
   color: var(--ink);
+  position: relative;
+  background-color: #eef0f3;
   background:
-    radial-gradient(circle at 15% 20%, rgba(22, 166, 202, 0.35), transparent 45%),
-    radial-gradient(circle at 80% 10%, rgba(17, 144, 198, 0.55), transparent 55%),
-    linear-gradient(135deg, #0a2b6d 0%, #0f42ea 45%, #1190c6 100%);
+    radial-gradient(circle at 15% 20%, rgba(22, 166, 202, 0.3), transparent 45%),
+    radial-gradient(circle at 80% 10%, rgba(17, 144, 198, 0.4), transparent 55%),
+    linear-gradient(
+      135deg,
+      rgba(10, 43, 109, 0.6) 0%,
+      rgba(15, 66, 234, 0.55) 45%,
+      rgba(17, 144, 198, 0.5) 100%
+    );
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.14;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'%3E%3Cg fill='none' stroke='rgba(15,66,234,0.35)' stroke-width='1.2'%3E%3Cpath d='M30 2 L60 20 L60 52 L30 70 L0 52 L0 20 Z'/%3E%3Cpath d='M90 2 L120 20 L120 52 L90 70 L60 52 L60 20 Z'/%3E%3Cpath d='M60 52 L90 70 L90 102 L60 120 L30 102 L30 70 Z' transform='translate(0 -16)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 120px 104px;
+  background-repeat: repeat;
+  background-position: 0 0;
+  animation: hex-fade 10s ease-in-out infinite;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Hero panel with layered gradient glow */
@@ -43,17 +69,16 @@ header {
   padding: 72px 24px 64px;
   position: relative;
   overflow: hidden;
+  background-color: rgba(39, 88, 240, 0.92);
 }
 
 header::before {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.9;
+  opacity: 1;
   z-index: 0;
-  background:
-    radial-gradient(circle at top, rgba(17, 144, 198, 0.35), transparent 55%),
-    radial-gradient(circle at 75% 30%, rgba(15, 66, 234, 0.75), transparent 60%);
+  background: rgba(39, 88, 240, 0.92);
 }
 
 /* Intro text block and subtle rise animation */
@@ -127,6 +152,7 @@ h1 {
 
 .overview-text {
   font-size: clamp(0.98rem, 1.7vw, 1.25rem);
+  text-align: center;
 }
 
 /* Main column sizing */
@@ -288,6 +314,16 @@ footer .subtitle {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes hex-fade {
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.2;
   }
 }
 
