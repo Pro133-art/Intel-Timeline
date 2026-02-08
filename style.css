@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
 /* =========================
    Theme + Global Defaults
@@ -7,13 +7,15 @@
   color-scheme: light;
   --ink: #f7f4ef;
   --ink-muted: rgba(247, 244, 239, 0.78);
-  --ocean-1: #0f42ea;
-  --ocean-2: #1190c6;
-  --ocean-3: #16a6ca;
-  --accent: #f6c667;
-  --accent-deep: #eaa332;
-  --card: rgba(12, 26, 36, 0.68);
-  --card-border: rgba(246, 198, 103, 0.28);
+  --ocean-1: #0c2bd8;
+  --ocean-2: #0b6fd1;
+  --ocean-3: #15c1d6;
+  --accent: #66f6ff;
+  --accent-deep: #2cc6ff;
+  --glow: rgba(102, 246, 255, 0.45);
+  --card: rgba(7, 18, 30, 0.72);
+  --card-border: rgba(102, 246, 255, 0.28);
+  --card-sheen: rgba(255, 255, 255, 0.05);
 }
 
 /* Keep sizing predictable across the layout. */
@@ -26,20 +28,22 @@
    ========================= */
 body {
   margin: 0;
-  font-family: "Space Grotesk", "Arial", sans-serif;
+  font-family: "Inter", "Arial", sans-serif;
   min-height: 100vh;
   color: var(--ink);
   position: relative;
   background-color: #eef0f3;
   background:
-    radial-gradient(circle at 15% 20%, rgba(22, 166, 202, 0.3), transparent 45%),
-    radial-gradient(circle at 80% 10%, rgba(17, 144, 198, 0.4), transparent 55%),
+    radial-gradient(circle at 10% 20%, rgba(21, 193, 214, 0.35), transparent 45%),
+    radial-gradient(circle at 85% 12%, rgba(12, 43, 216, 0.5), transparent 55%),
+    radial-gradient(circle at 50% 85%, rgba(102, 246, 255, 0.2), transparent 60%),
     linear-gradient(
       135deg,
-      rgba(10, 43, 109, 0.6) 0%,
-      rgba(15, 66, 234, 0.55) 45%,
-      rgba(17, 144, 198, 0.5) 100%
+      rgba(6, 24, 68, 0.88) 0%,
+      rgba(12, 43, 216, 0.7) 45%,
+      rgba(11, 111, 209, 0.55) 100%
     );
+  animation: gradient-shift 18s ease-in-out infinite;
 }
 
 /* Subtle animated hexagon overlay that sits behind all content. */
@@ -49,12 +53,29 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.14;
+  opacity: 0.16;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'%3E%3Cg fill='none' stroke='rgba(15,66,234,0.35)' stroke-width='1.2'%3E%3Cpath d='M30 2 L60 20 L60 52 L30 70 L0 52 L0 20 Z'/%3E%3Cpath d='M90 2 L120 20 L120 52 L90 70 L60 52 L60 20 Z'/%3E%3Cpath d='M60 52 L90 70 L90 102 L60 120 L30 102 L30 70 Z' transform='translate(0 -16)'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 120px 104px;
   background-repeat: repeat;
   background-position: 0 0;
   animation: hex-fade 10s ease-in-out infinite;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02) 0,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  opacity: 0.35;
+  mix-blend-mode: screen;
 }
 
 /* Ensure content layers above the pattern. */
@@ -77,7 +98,7 @@ header {
   padding: 72px 24px 64px;
   position: relative;
   overflow: hidden;
-  background-color: rgba(39, 88, 240, 0.92);
+  background-color: rgba(16, 55, 180, 0.92);
 }
 
 /* Solid overlay keeps the header color consistent across the hero. */
@@ -87,7 +108,9 @@ header::before {
   inset: 0;
   opacity: 1;
   z-index: 0;
-  background: rgba(39, 88, 240, 0.92);
+  background:
+    radial-gradient(circle at 20% 25%, rgba(102, 246, 255, 0.35), transparent 55%),
+    linear-gradient(120deg, rgba(12, 43, 216, 0.95) 0%, rgba(11, 111, 209, 0.88) 55%, rgba(8, 24, 64, 0.92) 100%);
 }
 
 .hero {
@@ -123,9 +146,10 @@ nav {
   gap: 20px;
   padding: 10px 18px;
   border-radius: 999px;
-  border: 1px solid rgba(246, 198, 103, 0.35);
-  background: rgba(12, 26, 36, 0.55);
+  border: 1px solid rgba(102, 246, 255, 0.35);
+  background: rgba(8, 20, 34, 0.55);
   backdrop-filter: blur(8px);
+  box-shadow: 0 0 18px rgba(102, 246, 255, 0.18);
 }
 
 nav a {
@@ -138,6 +162,7 @@ nav a {
 nav a:hover,
 nav a:focus {
   color: var(--accent);
+  text-shadow: 0 0 12px var(--glow);
 }
 
 /* =========================
@@ -145,17 +170,19 @@ nav a:focus {
    ========================= */
 h1 {
   margin: 0;
-  font-family: "Playfair Display", "Times New Roman", serif;
+  font-family: "Inter", "Arial", sans-serif;
   font-size: clamp(2.7rem, 5vw, 4.7rem);
   font-weight: 800;
   letter-spacing: 0.02em;
+  text-shadow: 0 0 26px rgba(102, 246, 255, 0.28);
 }
 
 .section-title {
   margin: 0 0 24px;
-  font-family: "Playfair Display", "Times New Roman", serif;
+  font-family: "Inter", "Arial", sans-serif;
   font-size: clamp(1.55rem, 2.3vw, 2.1rem);
   text-align: center;
+  text-shadow: 0 0 18px rgba(102, 246, 255, 0.2);
 }
 
 /* Subtitle treatment is shared by hero + overview copy. */
@@ -207,6 +234,7 @@ footer .subtitle {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-color: var(--accent) rgba(11, 47, 70, 0.35);
+  perspective: 900px;
 }
 
 /* Decorative rail guiding the horizontal scroll. */
@@ -217,7 +245,8 @@ footer .subtitle {
   right: 0;
   top: 8px;
   height: 2px;
-  background: linear-gradient(90deg, var(--accent) 0%, rgba(246, 198, 103, 0.1) 100%);
+  background: linear-gradient(90deg, var(--accent) 0%, rgba(102, 246, 255, 0.1) 100%);
+  box-shadow: 0 0 12px rgba(102, 246, 255, 0.35);
 }
 
 .timeline-card {
@@ -225,13 +254,38 @@ footer .subtitle {
   flex: 0 0 270px;
   width: 270px;
   padding: 24px 26px;
+  min-height: 420px;
   border-radius: 20px;
   border: 1px solid var(--card-border);
-  background: var(--card);
-  box-shadow: 0 20px 45px rgba(5, 20, 28, 0.35);
-  animation: fade-in 0.7s ease-out both;
+  background: linear-gradient(160deg, rgba(7, 18, 30, 0.72) 0%, rgba(7, 18, 30, 0.6) 55%, rgba(9, 28, 48, 0.58) 100%);
+  box-shadow: 0 22px 50px rgba(5, 20, 28, 0.45), 0 0 24px rgba(102, 246, 255, 0.08);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: translateY(10px) rotateX(6deg);
   scroll-snap-align: start;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+  animation: fade-in 0.7s ease-out both, float 6s ease-in-out infinite;
+}
+
+.timeline-card:nth-child(odd) {
+  transform: translateY(0) rotateX(6deg) rotateZ(-1.2deg);
+  animation-delay: 0.2s;
+}
+
+.timeline-card:nth-child(even) {
+  transform: translateY(16px) rotateX(6deg) rotateZ(1.2deg);
+  animation-delay: 0.45s;
+}
+
+.timeline-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, transparent 0%, var(--card-sheen) 45%, transparent 100%);
+  opacity: 0.45;
+  pointer-events: none;
 }
 
 /* Accent dot that pins each card to the rail. */
@@ -244,7 +298,7 @@ footer .subtitle {
   height: 14px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 6px rgba(246, 198, 103, 0.18);
+  box-shadow: 0 0 0 6px rgba(102, 246, 255, 0.18), 0 0 18px rgba(102, 246, 255, 0.4);
 }
 
 .timeline-year {
@@ -253,6 +307,7 @@ footer .subtitle {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--accent);
+  text-shadow: 0 0 10px rgba(102, 246, 255, 0.35);
 }
 
 .timeline-card h3 {
@@ -266,8 +321,9 @@ footer .subtitle {
   width: 100%;
   height: 160px;
   border-radius: 16px;
-  border: 1px solid rgba(246, 198, 103, 0.35);
-  background: rgba(8, 18, 26, 0.35);
+  border: 1px solid rgba(102, 246, 255, 0.35);
+  background: rgba(8, 18, 26, 0.45);
+  box-shadow: inset 0 0 22px rgba(102, 246, 255, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -287,23 +343,29 @@ footer .subtitle {
   font-size: clamp(14px, 1.2vw, 16px);
   line-height: 1.75;
   color: var(--ink-muted);
-  max-height: 0;
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(7, 18, 30, 0.75);
+  box-shadow: 0 16px 32px rgba(4, 12, 20, 0.35);
+  backdrop-filter: blur(8px);
   opacity: 0;
-  overflow: hidden;
-  transform: translateY(10px);
-  transition: max-height 0.4s ease, opacity 0.35s ease, transform 0.35s ease;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
   pointer-events: none;
 }
 
 .timeline-card:hover,
 .timeline-card:focus-within {
-  transform: translateY(-4px);
-  box-shadow: 0 26px 55px rgba(5, 20, 28, 0.45);
+  transform: translateY(-10px) translateZ(40px) rotateX(0deg) rotateZ(0deg);
+  box-shadow: 0 32px 70px rgba(5, 20, 28, 0.6), 0 0 40px rgba(102, 246, 255, 0.24);
 }
 
 .timeline-card:hover p,
 .timeline-card:focus-within p {
-  max-height: 220px;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -341,6 +403,26 @@ footer .subtitle {
   }
   50% {
     opacity: 0.2;
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(8px) rotateX(6deg);
+  }
+  50% {
+    transform: translateY(-6px) rotateX(4deg);
   }
 }
 
