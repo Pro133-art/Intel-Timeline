@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Intel Processor-Related Sustainability Milestones</title>
+    <title>Intel Sustainability Milestones</title>
     <meta
       name="description"
       content="A focused look at how processor architecture choices tie directly to energy efficiency, lifecycle emissions, and long-term climate goals."
     />
-    <meta property="og:title" content="Intel Processor-Related Sustainability Milestones" />
+    <meta property="og:title" content="Intel Sustainability Milestones" />
     <meta
       property="og:description"
       content="A focused look at how processor architecture choices tie directly to energy efficiency, lifecycle emissions, and long-term climate goals."
@@ -17,27 +17,41 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Skip link for keyboard users -->
+    <a class="skip-link" href="#timeline">Skip to timeline</a>
+
+    <!-- Site header with navigation and hero content -->
     <header>
+      <!-- Primary navigation for quick jumps -->
+      <nav aria-label="Primary">
+        <a href="#overview">Overview</a>
+        <a href="#timeline">Timeline</a>
+      </nav>
+
       <!-- Hero introduction and context for the timeline -->
       <div class="hero">
-        <h1>Intel Processor-Related Sustainability Milestones</h1>
+        <h1>Intel Sustainability Milestones</h1>
         <p class="subtitle">
-          A focused look at how processor architecture choices tie directly to
-          energy efficiency, lifecycle emissions, and long-term climate goals.
+          A concise view of how Intel advances energy efficiency, reduces
+          lifecycle emissions, and supports long-term climate goals.
         </p>
       </div>
     </header>
 
-    <main>
-      <!-- Section heading and summary for the milestones -->
-      <h2 class="section-title">Timeline Highlights</h2>
-      <p class="subtitle">
-        Each milestone centers on processor energy efficiency and the broader
-        sustainability impact across devices and data centers.
-      </p>
+    <!-- Main content for the page -->
+    <main id="overview">
+      <!-- Timeline intro section -->
+      <section aria-labelledby="timeline-heading">
+        <h2 id="timeline-heading" class="section-title">Timeline Highlights</h2>
+        <p class="subtitle">
+          Each milestone centers on processor energy efficiency and the broader
+          sustainability impact across devices and data centers.
+        </p>
+      </section>
 
-      <!-- Ordered set of milestones -->
-      <div class="timeline">
+      <!-- Horizontal timeline section -->
+      <section id="timeline" aria-label="Sustainability timeline">
+        <div class="timeline">
         <!-- Early shift to efficiency-first design goals -->
         <article class="timeline-card">
           <div class="timeline-year">Early 2000s</div>
@@ -130,7 +144,13 @@
             centers.
           </p>
         </article>
-      </div>
+        </div>
+      </section>
     </main>
+
+    <!-- Footer for page context -->
+    <footer>
+      <p class="subtitle">Intel Sustainability Milestones timeline overview.</p>
+    </footer>
   </body>
 </html>
