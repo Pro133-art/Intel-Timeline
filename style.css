@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
 /* =========================
-   Theme + Global Defaults
+   Theme Tokens
    ========================= */
 :root {
   color-scheme: light;
@@ -18,14 +18,17 @@
   --card-sheen: rgba(255, 255, 255, 0.05);
 }
 
-/* Keep sizing predictable across the layout. */
+/* =========================
+   Base + Layout Defaults
+   ========================= */
 * {
   box-sizing: border-box;
 }
 
-/* =========================
-   Page Background + Pattern
-   ========================= */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: "Inter", "Arial", sans-serif;
@@ -46,7 +49,7 @@ body {
   animation: gradient-shift 18s ease-in-out infinite;
 }
 
-/* Subtle animated hexagon overlay that sits behind all content. */
+/* Atmospheric overlays sit behind all content. */
 body::before {
   content: "";
   position: fixed;
@@ -78,10 +81,64 @@ body::after {
   mix-blend-mode: screen;
 }
 
-/* Ensure content layers above the pattern. */
 body > * {
   position: relative;
   z-index: 1;
+}
+
+/* =========================
+   Typography
+   ========================= */
+h1 {
+  margin: 0;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: clamp(2.7rem, 5vw, 4.7rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 26px rgba(102, 246, 255, 0.28);
+}
+
+.section-title {
+  margin: 0 0 24px;
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: clamp(1.55rem, 2.3vw, 2.1rem);
+  text-align: center;
+  text-shadow: 0 0 18px rgba(102, 246, 255, 0.2);
+}
+
+.subtitle {
+  margin: 16px auto 0;
+  max-width: 58ch;
+  font-size: clamp(1.05rem, 2.1vw, 1.5rem);
+  line-height: 1.7;
+  color: var(--ink-muted);
+}
+
+.overview-text {
+  font-size: clamp(0.98rem, 1.7vw, 1.25rem);
+  text-align: center;
+}
+
+/* =========================
+   Global Layout
+   ========================= */
+main {
+  padding: 48px 24px 96px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.timeline-intro {
+  margin-bottom: 45px;
+}
+
+footer {
+  padding: 0 24px 64px;
+  text-align: center;
+}
+
+footer .subtitle {
+  margin: 0 auto;
 }
 
 /* =========================
@@ -101,7 +158,6 @@ header {
   background-color: rgba(16, 55, 180, 0.92);
 }
 
-/* Solid overlay keeps the header color consistent across the hero. */
 header::before {
   content: "";
   position: absolute;
@@ -120,7 +176,6 @@ header::before {
   animation: rise 0.9s ease-out both;
 }
 
-/* Skip link stays out of view until focused. */
 .skip-link {
   position: absolute;
   left: 16px;
@@ -166,63 +221,6 @@ nav a:focus {
 }
 
 /* =========================
-   Typography + Shared Text
-   ========================= */
-h1 {
-  margin: 0;
-  font-family: "Inter", "Arial", sans-serif;
-  font-size: clamp(2.7rem, 5vw, 4.7rem);
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-shadow: 0 0 26px rgba(102, 246, 255, 0.28);
-}
-
-.section-title {
-  margin: 0 0 24px;
-  font-family: "Inter", "Arial", sans-serif;
-  font-size: clamp(1.55rem, 2.3vw, 2.1rem);
-  text-align: center;
-  text-shadow: 0 0 18px rgba(102, 246, 255, 0.2);
-}
-
-/* Subtitle treatment is shared by hero + overview copy. */
-.subtitle {
-  margin: 16px auto 0;
-  max-width: 58ch;
-  font-size: clamp(1.05rem, 2.1vw, 1.5rem);
-  line-height: 1.7;
-  color: var(--ink-muted);
-}
-
-.overview-text {
-  font-size: clamp(0.98rem, 1.7vw, 1.25rem);
-  text-align: center;
-}
-
-/* =========================
-   Layout Sections
-   ========================= */
-main {
-  padding: 48px 24px 96px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* Adds breathing room between overview and timeline. */
-.timeline-intro {
-  margin-bottom: 45px;
-}
-
-footer {
-  padding: 0 24px 64px;
-  text-align: center;
-}
-
-footer .subtitle {
-  margin: 0 auto;
-}
-
-/* =========================
    Timeline + Cards
    ========================= */
 .timeline {
@@ -232,12 +230,13 @@ footer .subtitle {
   position: relative;
   padding: 18px 4px 22px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 12px;
+  scroll-behavior: smooth;
   scrollbar-color: var(--accent) rgba(11, 47, 70, 0.35);
   perspective: 900px;
 }
 
-/* Decorative rail guiding the horizontal scroll. */
 .timeline::before {
   content: "";
   position: absolute;
@@ -253,7 +252,7 @@ footer .subtitle {
   position: relative;
   flex: 0 0 270px;
   width: 270px;
-  padding: 24px 26px;
+  padding: 24px 26px 96px;
   min-height: 420px;
   border-radius: 20px;
   border: 1px solid var(--card-border);
@@ -263,7 +262,8 @@ footer .subtitle {
   overflow: hidden;
   transform-style: preserve-3d;
   transform: translateY(10px) rotateX(6deg);
-  scroll-snap-align: start;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
   transition: transform 0.45s ease, box-shadow 0.45s ease;
   animation: fade-in 0.7s ease-out both, float 6s ease-in-out infinite;
 }
@@ -278,6 +278,7 @@ footer .subtitle {
   animation-delay: 0.45s;
 }
 
+/* Glass sheen layer and anchor dot. */
 .timeline-card::after {
   content: "";
   position: absolute;
@@ -288,7 +289,6 @@ footer .subtitle {
   pointer-events: none;
 }
 
-/* Accent dot that pins each card to the rail. */
 .timeline-card::before {
   content: "";
   position: absolute;
@@ -315,11 +315,10 @@ footer .subtitle {
   font-size: 1.4rem;
 }
 
-/* Media slot for each milestone image. */
 .timeline-media {
   margin: 12px auto 16px;
   width: 100%;
-  height: 160px;
+  height: 145px;
   border-radius: 16px;
   border: 1px solid rgba(102, 246, 255, 0.35);
   background: rgba(8, 18, 26, 0.45);
@@ -337,7 +336,7 @@ footer .subtitle {
   display: block;
 }
 
-/* Card descriptions reveal on hover/focus. */
+/* Overlay description so hover does not resize the card. */
 .timeline-card p {
   margin: 0;
   font-size: clamp(14px, 1.2vw, 16px);
@@ -435,11 +434,24 @@ footer .subtitle {
   }
 
   .timeline-card {
-    padding: 26px 30px;
+    padding: 26px 30px 96px;
   }
 
   .timeline-media {
     height: 170px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .timeline-card {
+    flex: 0 0 calc((100% - (var(--card-gap) * 3)) / 4);
+    width: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .timeline-card {
+    flex-basis: calc((100% - var(--card-gap)) / 2);
   }
 }
 
@@ -464,7 +476,7 @@ footer .subtitle {
     left: 12px;
     width: 2px;
     height: auto;
-    background: linear-gradient(180deg, var(--accent) 0%, rgba(246, 198, 103, 0.1) 100%);
+    background: linear-gradient(180deg, var(--accent) 0%, rgba(102, 246, 255, 0.1) 100%);
   }
 
   .timeline-card::before {
@@ -480,11 +492,5 @@ footer .subtitle {
 
   .timeline-media {
     height: 150px;
-  }
-}
-
-@media (max-width: 900px) {
-  .timeline-card {
-    flex-basis: calc((100% - var(--card-gap)) / 2);
   }
 }
