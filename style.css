@@ -234,6 +234,7 @@ footer .subtitle {
 /* Milestone description */
 .timeline-card p {
   margin: 0;
+  font-size: clamp(14px, 1.2vw, 16px);
   line-height: 1.75;
   color: var(--ink-muted);
   max-height: 0;
@@ -302,20 +303,33 @@ footer .subtitle {
   }
 
   .timeline {
-    --card-gap: 20px;
-    padding: 16px 4px 20px;
+    --card-gap: clamp(16px, 4vw, 22px);
+    flex-direction: column;
+    padding: clamp(14px, 3vw, 18px) 6px clamp(18px, 4vw, 24px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    max-height: 70vh;
   }
 
   .timeline::before {
-    top: 6px;
+    top: 0;
+    bottom: 0;
+    left: 12px;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, var(--accent) 0%, rgba(246, 198, 103, 0.1) 100%);
   }
 
   .timeline-card::before {
-    left: 20px;
+    left: 6px;
+    top: 20px;
   }
 
   .timeline-card {
-    flex-basis: 100%;
+    flex: 0 0 auto;
+    width: 100%;
+    scroll-snap-align: start;
   }
 
   .timeline-media {
