@@ -125,6 +125,10 @@ h1 {
   color: var(--ink-muted);
 }
 
+.overview-text {
+  font-size: clamp(0.98rem, 1.7vw, 1.25rem);
+}
+
 /* Main column sizing */
 main {
   padding: 48px 24px 96px;
@@ -135,7 +139,12 @@ main {
 .section-title {
   margin: 0 0 24px;
   font-family: "Playfair Display", "Times New Roman", serif;
-  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  font-size: clamp(1.55rem, 2.3vw, 2.1rem);
+  text-align: center;
+}
+
+.timeline-intro {
+  margin-bottom: 45px;
 }
 
 /* Footer context styling */
