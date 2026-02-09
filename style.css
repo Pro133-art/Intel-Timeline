@@ -299,6 +299,18 @@ main {
   text-align-last: center;
 }
 
+@media (min-width: 900px) {
+  .subtitle {
+    max-width: 72ch;
+  }
+
+  .timeline-intro .subtitle {
+    max-width: 72ch;
+    text-align: center;
+    text-justify: auto;
+  }
+}
+
 footer {
   padding: 0 24px 64px;
   text-align: center;
