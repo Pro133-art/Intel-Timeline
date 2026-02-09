@@ -272,5 +272,39 @@
     <footer>
       <p class="subtitle">Intel Sustainability Milestones timeline overview.</p>
     </footer>
+
+    <script>
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const heroLetters = Array.from(document.querySelectorAll(".hero-letter"));
+      const header = document.querySelector("header");
+
+      const restartHeroAnimation = () => {
+        if (prefersReducedMotion.matches) {
+          return;
+        }
+        heroLetters.forEach((letter) => {
+          letter.style.animation = "none";
+          letter.offsetHeight;
+          letter.style.animation = "";
+        });
+      };
+
+      restartHeroAnimation();
+
+      if (header) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                restartHeroAnimation();
+              }
+            });
+          },
+          { threshold: 0.6 }
+        );
+
+        observer.observe(header);
+      }
+    </script>
   </body>
 </html>
