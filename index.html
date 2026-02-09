@@ -273,10 +273,25 @@
       <p class="subtitle">Intel Sustainability Milestones timeline overview.</p>
     </footer>
 
+    <section class="video-section" aria-labelledby="video-heading">
+      <h2 id="video-heading" class="section-title">Video</h2>
+      <a
+        class="video-card"
+        href="https://www.youtube.com/watch?v=GmLvEz1Qfgk&t=147s"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          src="https://img.youtube.com/vi/GmLvEz1Qfgk/hqdefault.jpg"
+          alt="Video preview: Intel Sustainability Milestones"
+          loading="lazy"
+        />
+      </a>
+    </section>
+
     <script>
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
       const heroLetters = Array.from(document.querySelectorAll(".hero-letter"));
-      const header = document.querySelector("header");
 
       const restartHeroAnimation = () => {
         if (prefersReducedMotion.matches) {
@@ -289,22 +304,7 @@
         });
       };
 
-      restartHeroAnimation();
-
-      if (header) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                restartHeroAnimation();
-              }
-            });
-          },
-          { threshold: 0.6 }
-        );
-
-        observer.observe(header);
-      }
+      window.addEventListener("load", restartHeroAnimation, { once: true });
     </script>
   </body>
 </html>
